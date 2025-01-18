@@ -1,4 +1,4 @@
-public class PriorityQueue
+﻿public class PriorityQueue
 {
     private List<PriorityItem> _queue = new();
 
@@ -56,7 +56,8 @@ internal class PriorityItem
     internal PriorityItem(string value, int priority)
     {
         Value = value;
-        Priority = priority;
+        Priority = 
+        priority;
     }
 
     public override string ToString()

@@ -1,4 +1,4 @@
-/// <summary>
+﻿/// <summary>
 /// Maintain a Customer Service Queue.  Allows new customers to be 
 /// added and allows customers to be serviced.
 /// </summary>
@@ -11,17 +11,20 @@ public class CustomerService {
         // Test Cases
 
         // Test 1
-        // Scenario: 
-        // Expected Result: 
+        // Scenario: Can I add one customer and then serve the customer?
+        // Expected Result: This should display the customer that was added
         Console.WriteLine("Test 1");
+        var service = new CustomerService(4);
+        service.AddNewCustomer();
+        service.ServeCustomer();
 
         // Defect(s) Found: 
 
         Console.WriteLine("=================");
 
         // Test 2
-        // Scenario: 
-        // Expected Result: 
+        // Scenario: Can I add two customers and then serve the customers in the right order?
+        // Expected Result: This should display the customers in the same order that they were entered 
         Console.WriteLine("Test 2");
         service = new CustomerService(4);
         service.AddNewCustomer();
@@ -29,6 +32,7 @@ public class CustomerService {
         Console.WriteLine($"Before serving customers: {service}");
         service.ServeCustomer();
         service.ServeCustomer();
+
         Console.WriteLine($"After serving customers: {service}");
 
         // Defect(s) Found: 
@@ -66,7 +70,7 @@ public class CustomerService {
         service = new CustomerService(0);
 
         Console.WriteLine($"Size should be 10: {service}");
-    }
+    } 
 
     private readonly List<Customer> _queue = new();
     private readonly int _maxSize;
@@ -125,8 +129,8 @@ public class CustomerService {
     /// Dequeue the next customer and display the information.
     /// </summary>
     private void ServeCustomer() {
-        _queue.RemoveAt(0);
         var customer = _queue[0];
+        _queue.RemoveAt(0);
         Console.WriteLine(customer);
     }
 
