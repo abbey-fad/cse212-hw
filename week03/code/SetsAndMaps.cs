@@ -1,3 +1,4 @@
+using System.Globalization;
 using System.Text.Json;
 
 public static class SetsAndMaps
@@ -22,7 +23,25 @@ public static class SetsAndMaps
     public static string[] FindPairs(string[] words)
     {
         // TODO Problem 1 - ADD YOUR CODE HERE
-        return [];
+        HashSet<string> seen = new HashSet<string>();
+        List<string> result = new List<string>();
+
+        foreach (var word in words)
+        {
+            // Reverse the current word
+            string reversed = new string(word.Reverse().ToArray());
+
+            // If the reversed word exists in the set, add the pair to the result
+            if (seen.Contains(reversed))
+            {
+                result.Add($"{word} & {reversed}");
+            }
+
+            // Add the current word to the set
+            seen.Add(word);
+        }
+
+        return result.ToArray();
     }
 
     /// <summary>
@@ -43,6 +62,16 @@ public static class SetsAndMaps
         {
             var fields = line.Split(",");
             // TODO Problem 2 - ADD YOUR CODE HERE
+            var degree = fields[3].Trim();
+
+            if (degrees.ContainsKey(degree))
+            {
+                degrees[degree]++;
+            }
+            else
+            {
+                degrees[degree] = 1;
+            }
         }
 
         return degrees;
@@ -57,6 +86,30 @@ public static class SetsAndMaps
     /// is_anagram("CAT","ACT") would return true
     /// is_anagram("DOG","GOOD") would return false because GOOD has 2 O's
     /// 
+        // Remove spaces and convert to lowercase
+        word1 = string.Concat(word1.Where(char.IsLetterOrDigit)).ToLower();
+        word2 = string.Concat(word2.Where(char.IsLetterOrDigit)).ToLower();
+
+        if (word1.Length != word2.Length) return false;
+
+        Dictionary<char, int> charCount = new Dictionary<char, int>();
+
+        foreach (var c in word1)
+        {
+            if (charCount.ContainsKey(c))
+            {
+                charCount[c]++;
+            }
+            else
+            {
+                charCount[c] = 1;
+            }
+        }
+
+        foreach (var c in word2)
+        {
+            if (!charCount.ContainsKey(c) || charCount[c] == 0)
+            {
     /// Important Note: When determining if two words are anagrams, you
     /// should ignore any spaces.  You should also ignore cases.  For 
     /// example, 'Ab' and 'Ba' should be considered anagrams
@@ -67,7 +120,37 @@ public static class SetsAndMaps
     public static bool IsAnagram(string word1, string word2)
     {
         // TODO Problem 3 - ADD YOUR CODE HERE
-        return false;
+        // Remove spaces and convert to lowercase
+        word1 = string.Concat(word1.Where(char.IsLetterOrDigit)).ToLower();
+        word2 = string.Concat(word2.Where(char.IsLetterOrDigit)).ToLower();
+
+        if (word1.Length != word2.Length) return false;
+
+        Dictionary<char, int> charCount = new Dictionary<char, int>();
+
+        foreach (var c in word1)
+        {
+            if (charCount.ContainsKey(c))
+            {
+                charCount[c]++;
+            }
+            else
+            {
+                charCount[c] = 1;
+            }
+        }
+
+        foreach (var c in word2)
+        {
+            if (!charCount.ContainsKey(c) || charCount[c] == 0)
+            {
+                return false;
+            }
+
+            charCount[c]--;
+        }
+
+        return true;
     }
 
     /// <summary>
@@ -101,6 +184,23 @@ public static class SetsAndMaps
         // on those classes so that the call to Deserialize above works properly.
         // 2. Add code below to create a string out each place a earthquake has happened today and its magitude.
         // 3. Return an array of these string descriptions.
-        return [];
-    }
+        if (featureCollection == null || featureCollection.Features == null)
+        {
+            return Array.Empty<string>();
+        }
+
+        var result = new List<string>();
+        foreach (var feature in featureCollection.Features)
+        {
+            var place = feature.Properties.Place;
+            var magnitude = feature.Properties.Mag;
+            if (!string.IsNullOrEmpty(place) && magnitude.HasValue)
+            {
+                result.Add($"{place} - Mag {magnitude.Value:F2}");
+            }
+        }
+
+        return result.ToArray();
+     
+    }    
 }
