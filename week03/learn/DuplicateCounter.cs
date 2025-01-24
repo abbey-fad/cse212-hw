@@ -1,4 +1,4 @@
-public class DuplicateCounter
+﻿public class DuplicateCounter
 {
     //Count how many duplicates are in a collection of data.
 

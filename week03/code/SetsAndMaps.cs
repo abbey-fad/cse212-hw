@@ -86,30 +86,6 @@ public static class SetsAndMaps
     /// is_anagram("CAT","ACT") would return true
     /// is_anagram("DOG","GOOD") would return false because GOOD has 2 O's
     /// 
-        // Remove spaces and convert to lowercase
-        word1 = string.Concat(word1.Where(char.IsLetterOrDigit)).ToLower();
-        word2 = string.Concat(word2.Where(char.IsLetterOrDigit)).ToLower();
-
-        if (word1.Length != word2.Length) return false;
-
-        Dictionary<char, int> charCount = new Dictionary<char, int>();
-
-        foreach (var c in word1)
-        {
-            if (charCount.ContainsKey(c))
-            {
-                charCount[c]++;
-            }
-            else
-            {
-                charCount[c] = 1;
-            }
-        }
-
-        foreach (var c in word2)
-        {
-            if (!charCount.ContainsKey(c) || charCount[c] == 0)
-            {
     /// Important Note: When determining if two words are anagrams, you
     /// should ignore any spaces.  You should also ignore cases.  For 
     /// example, 'Ab' and 'Ba' should be considered anagrams
