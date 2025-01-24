@@ -58,7 +58,7 @@ public static class SetsAndMaps
     public static Dictionary<string, int> SummarizeDegrees(string filename)
     {
         var degrees = new Dictionary<string, int>();
-        foreach (var line in File.ReadLines(filename))
+        foreach (var line in File.ReadLines("census.txt"))
         {
             var fields = line.Split(",");
             // TODO Problem 2 - ADD YOUR CODE HERE
