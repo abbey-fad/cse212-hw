@@ -74,9 +74,4 @@ public class PriorityQueueTests
         Assert.AreEqual("Task3", priorityQueue.Dequeue()); // Next highest priority
         Assert.AreEqual("Task1", priorityQueue.Dequeue()); // Lowest priority
     }
-
-
-
-
-
 }
