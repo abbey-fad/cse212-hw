@@ -113,7 +113,7 @@ public static class Recursion
         // TODO Start Problem 3
         // Initialize remember dictionary if not provided
         if (remember == null) remember = new Dictionary<int, decimal>();
-
+    
         // Base cases
         if (s == 0) return 1;
         if (s == 1) return 1;
@@ -127,6 +127,7 @@ public static class Recursion
         decimal ways = CountWaysToClimb(s - 1, remember) + CountWaysToClimb(s - 2, remember) + CountWaysToClimb(s - 3, remember);
         remember[s] = ways; // Store result in remember dictionary
         return ways;
+
     }
 
     /// <summary>
